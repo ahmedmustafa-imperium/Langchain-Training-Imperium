@@ -36,3 +36,36 @@ It consists of two main scripts:
 
 ---
 
+# Task 2 – AI Text Summarizer   
+
+This project is part of my **LangChain training tasks**, focused on understanding how to use **LangChain** with **Azure OpenAI** to build a simple **text summarization chain**.  
+The goal is to practice prompt templates, chains, and Azure model configuration in LangChain.
+
+---
+
+## 📘 Overview
+This project uses **LangChain** and **Azure OpenAI** to summarize text into different lengths using an LLM (Large Language Model).  
+
+It consists of:
+1. **`summarizer.py`** – Defines the `summarization_chain()` function using LangChain’s prompt and LLM tools.  
+2. **`task_2.py`** – Loads text input, invokes the summarizer for both 3-line and 1-line summaries, and displays the results.
+
+---
+
+## 🧩 What I Did
+- Loaded environment variables securely using the `.env` file via `load_env()`.  
+- Created an **AzureChatOpenAI** instance to connect to the Azure OpenAI model defined in environment variables.  
+- Built a **PromptTemplate** to structure summarization instructions.  
+- Used the LangChain **pipe operator (`|`)** to connect the prompt and the model into a single chain.  
+- Invoked the summarizer to generate both short (1 line) and slightly longer (3 line) summaries of the same text.  
+
+---
+
+## 💡 What I Understood
+- How to integrate **Azure OpenAI** with **LangChain** using environment variables for secure access.  
+- The role of **PromptTemplate** in controlling how LLMs respond.  
+- How **LangChain chains** link multiple components together (`prompt | llm`).  
+- How to call a LangChain chain with `.invoke()` to pass input and get model output.  
+- How to structure and format output summaries cleanly.
+
+---
