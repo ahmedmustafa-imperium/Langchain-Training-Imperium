@@ -69,3 +69,38 @@ It consists of:
 - How to structure and format output summaries cleanly.
 
 ---
+
+# Task 3 – Text Retrieval and Summarization   
+
+This project is part of my **LangChain Training Series**, focused on learning how to use **retrievers**, **embeddings**, and **vector stores** in LangChain.  
+In this task, I built a small pipeline that loads a document, splits it into chunks, stores embeddings in memory, retrieves relevant text based on a query, and then summarizes the result using the summarization chain from **Task 2**.
+
+---
+
+## 📘 Overview
+This task demonstrates a **retrieval-based workflow** combined with **text summarization** using **LangChain** and **Azure OpenAI**.  
+It consists of two main components:
+
+1. **`retriever.py`** – Handles document loading, splitting, embedding, and vector-based retrieval.  
+2. **`task_3.py`** – Uses the retriever to find relevant text and then summarizes it using the `summary()` function from Task 2.
+
+---
+
+## 🧩 What I Did
+- Used LangChain’s **TextLoader** to load a `.txt` file into memory.  
+- Split the text into smaller chunks using **RecursiveCharacterTextSplitter** for efficient embedding and retrieval.  
+- Generated vector embeddings using **AzureOpenAIEmbeddings**.  
+- Stored embeddings in an **InMemoryVectorStore** for fast in-memory retrieval.  
+- Queried the retriever with a keyword (“AI Milestones”) to fetch the most relevant text.  
+- Passed the retrieved content into the **summary()** function from Task 2 to generate concise summaries.
+
+---
+
+## 💡 What I Understood
+- How to use **LangChain retrievers** to find contextually relevant text from a document.  
+- How **embeddings** represent text semantically for similarity search.  
+- The importance of **text chunking** for better performance and accuracy in retrieval tasks.  
+- How to chain multiple LangChain components together — retrieval + summarization — for real-world applications.  
+- How to manage Azure OpenAI deployments for both embeddings and chat-based summarization.
+
+---
