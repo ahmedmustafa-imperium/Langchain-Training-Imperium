@@ -104,3 +104,48 @@ It consists of two main components:
 - How to manage Azure OpenAI deployments for both embeddings and chat-based summarization.
 
 ---
+
+# 🧠 Task 4 – Creating an Agent for Summarization
+
+This task is part of my **LangChain Training Series**, aimed at understanding how to build autonomous agents that can use tools intelligently to perform summarization tasks.  
+The goal was to create an **agent** capable of reasoning about user input and applying a **custom summarization tool** based on the chain built in Task 2.
+
+---
+
+## 📘 Overview
+
+In this task, I designed a system where:
+- A **custom LangChain Tool** (`TextSummarizer`) wraps around the summarization chain.
+- A **Zero-Shot ReAct Agent** uses this tool to summarize text automatically.
+- The agent is tested with both **specific** and **vague** requests to analyze its reasoning process.
+
+This task connects all previous components — environment setup, summarizer chain, and LangChain agent — into one intelligent pipeline.
+
+---
+
+## 🧩 What I Did
+
+- Implemented a function `text_summarizer_tool()` inside **`utils/tools.py`** that transforms the summarization chain into a LangChain-compatible `Tool`.
+- Created a `zeroshot_agent()` function inside **`utils/agents.py`** that initializes a **Zero-Shot ReAct agent** using the Azure OpenAI model.
+- Developed **`task_4.py`** to:
+  - Load environment variables.
+  - Initialize the summarization tool and attach it to the agent.
+  - Provide a 100-word text about **AI’s impact on healthcare**.
+  - Test the agent with:
+    1. A clear prompt: “Summarize the impact of AI on healthcare.”
+    2. A vague prompt: “Summarize something interesting.”
+- Printed both results to compare how the agent responds to specific vs. vague requests.
+
+---
+
+## 💡 What I Understood
+
+- How to create and integrate **custom tools** in LangChain that agents can use automatically.
+- The working of **Zero-Shot ReAct Agents**, which can reason about input and decide which tool to call.
+- How **LangChain agents** interpret and handle vague instructions using reasoning before taking action.
+- The importance of **clear, structured prompts** for consistent and accurate summarization.
+- How different LangChain components (LLMs, tools, and environment variables) interact to form a complete intelligent workflow.
+- The concept of **ReAct reasoning**, where the agent alternates between *thinking* (reasoning) and *acting* (calling tools).
+
+---
+
