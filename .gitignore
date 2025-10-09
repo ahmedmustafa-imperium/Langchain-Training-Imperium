@@ -205,3 +205,8 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+__pypackages__/
+.pdm.toml
+.pdm-python
+*.pyc
+.DS_Store
