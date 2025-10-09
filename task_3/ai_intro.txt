@@ -1,0 +1,28 @@
+Artificial Intelligence (AI) has evolved from an ambitious dream into one of the most transformative technologies of the modern era. 
+The roots of AI can be traced back to classical philosophers who attempted to describe human thinking as a symbolic system. 
+However, AI as a formal academic field began in the 1950s, when pioneers such as Alan Turing, John McCarthy, Marvin Minsky, and Claude Shannon explored the concept of machines that could simulate human intelligence. 
+In 1956, the Dartmouth Conference, organized by McCarthy, officially coined the term “Artificial Intelligence” and marked the birth of AI research as a distinct discipline.
+
+During the 1960s and 1970s, researchers were optimistic about creating machines capable of reasoning, playing games, and solving problems. 
+Programs like ELIZA, which simulated human conversation, and SHRDLU, which demonstrated simple reasoning in a virtual world, showcased early progress. 
+However, limited computational power and unrealistic expectations soon led to a slowdown in progress known as the “AI winter.” 
+Funding was cut, enthusiasm waned, and many believed true intelligence in machines was far from achievable.
+
+In the 1980s, AI experienced a resurgence with the rise of “expert systems.” 
+These were programs designed to mimic human decision-making within specialized domains, such as diagnosing diseases or configuring computer systems. 
+Although these systems found commercial success, they were rigid and difficult to scale. 
+As computing power increased in the 1990s, machine learning began to gain attention as a more flexible and data-driven approach to AI.
+
+A major milestone came in 1997 when IBM’s Deep Blue defeated world chess champion Garry Kasparov, symbolizing a new era of machine capability. 
+In the 2000s and 2010s, the availability of massive datasets, advancements in computing hardware, and the development of neural networks fueled the rise of deep learning. 
+Breakthroughs such as speech recognition, image classification, and natural language understanding became possible, transforming industries from healthcare to finance. 
+Google’s AlphaGo defeating Lee Sedol in 2016 and OpenAI’s GPT-3 demonstrating human-like language generation in 2020 were key achievements that captured global attention.
+
+Today, AI is deeply embedded in daily life, powering voice assistants, recommendation systems, autonomous vehicles, and medical diagnostics. 
+The field now explores reinforcement learning, multimodal AI, and quantum computing integration. 
+At the same time, ethical considerations such as bias, transparency, and accountability have become critical topics in AI development. 
+Governments, researchers, and corporations are working to ensure that AI technologies remain beneficial, fair, and aligned with human values.
+
+From rule-based reasoning to deep learning and beyond, the history of AI reflects humanity’s enduring quest to replicate and enhance intelligence. 
+Each milestone represents not only a technological breakthrough but also a philosophical exploration into what it means to think, learn, and create. 
+As AI continues to evolve, it promises to reshape society, the economy, and human potential in ways we are only beginning to understand.

@@ -25,4 +25,4 @@ As AI becomes increasingly integrated into society, researchers emphasize the im
 The future of AI lies in developing more explainable, secure, and general-purpose systems that can collaborate effectively with humans while preserving trust and ethical integrity. 
 Ultimately, AI represents both an opportunity and a challenge, shaping the next era of technological and societal transformation.
 """
-    summary()
+    summary(text)
