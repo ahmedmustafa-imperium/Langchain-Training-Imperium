@@ -149,3 +149,68 @@ This task connects all previous components — environment setup, summarizer cha
 
 ---
 
+# 🧠 Task 5 – Dynamic Agent with Logging, Exception Handling, and Multiple Tools  
+
+This task builds upon previous LangChain exercises to create a **more robust and dynamic agent pipeline**.  
+The objective is to enhance flexibility, debugging, and reliability while integrating multiple tools (retrieval, summarization, and word count) in a single intelligent workflow.  
+
+This task introduces **dynamic configuration**, **file-based logging**, and **structured error handling** to make the agent production-ready.
+
+---
+
+## 📘 Overview  
+
+This project extends the previous tasks by combining all three key components — retrieval, summarization, and analysis — into a single system.  
+It dynamically configures tools, initializes a zero-shot agent, executes multiple tasks, and logs every step for traceability.  
+
+The agent can:
+- Retrieve text from a document.  
+- Summarize it in a defined number of sentences.  
+- Optionally count the words in the summary.  
+
+It uses **LangChain exceptions** for structured error handling and Python’s built-in **logging** for file-based debugging.  
+
+---
+
+## 🧩 What I Did  
+
+- Implemented **`configure_tools()`** to dynamically set up all required tools:
+  - `retrieval_tool` – extracts relevant document sections.  
+  - `text_summarizer_tool` – generates a concise summary.  
+  - `word_count_tool` – counts the number of words in the final summary.  
+- Built **`create_agent()`** to initialize a **Zero-Shot ReAct agent** using the tools and Azure OpenAI.  
+- Added **`execute_agent_tasks()`** to:
+  - Run multiple queries dynamically.  
+  - Catch and log errors such as parsing issues or runtime failures.  
+  - Print cleanly formatted output for each task.  
+- Integrated **`langchain_core.exceptions.OutputParserException`** for handling model output parsing errors gracefully.  
+- Configured **file-based logging** (`agent_execution.log`) for debugging and process monitoring.  
+- Made the system **dynamic** — tool count, file path, and summary length can be changed via parameters.  
+- Created and executed two example queries:
+  1. Retrieve and summarize details about AI breakthroughs.  
+  2. Retrieve, summarize, and count words in the resulting summary.  
+
+---
+
+## 💡 What I Understood  
+
+- How to build **dynamic and reusable LangChain pipelines** that accept parameters instead of hardcoded values.  
+- The importance of **structured exception handling** using LangChain’s built-in exception classes.  
+- How to implement **file-based logging** to trace agent behavior and diagnose issues without cluttering the terminal.  
+- The benefits of combining multiple tools (retriever, summarizer, word counter) into one intelligent agent workflow.  
+- The flexibility of the **Zero-Shot ReAct Agent**, which can reason and decide when to use which tool.  
+- How well-structured modular functions (`configure_tools`, `create_agent`, `execute_agent_tasks`) improve readability and maintenance.  
+
+---
+
+## ⚙️ Key Features  
+
+| Feature | Description |
+|----------|-------------|
+| **Dynamic Tool Setup** | Tools are configured based on input parameters with safe defaults. |
+| **Logging System** | All operations are recorded in `agent_execution.log` for debugging. |
+| **Error Handling** | Uses `OutputParserException` and fallback error handling for unexpected issues. |
+| **Multi-Tool Integration** | Combines retrieval, summarization, and word count in one agent. |
+| **Configurable Queries** | Supports multiple queries in a single execution cycle. |
+
+---
