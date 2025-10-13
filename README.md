@@ -287,3 +287,51 @@ The task also required comparing how each memory type influences the summarizati
 - *Summary Memory* is better suited for continuous, long-form interactions where token efficiency matters.  
 
 ---
+
+# 🧩 Task 7: Leveraging Document Loaders for Diverse Sources
+
+## 📘 Objective
+The goal of this task was to **extend document retrieval and summarization capabilities** by incorporating **multiple data source types** — including **text, PDF, and web-based documents**.  
+This task demonstrates how LangChain’s document loaders, text splitters, and retrievers can be used dynamically with Azure OpenAI embeddings to extract, process, and summarize information efficiently.
+
+---
+
+## ⚙️ Implementation Details
+
+### 🔹 Files Involved
+- `task_7/task7.py` → Main execution file for Task 7.
+- `utils/retriever.py` → Enhanced retriever functions to support multi-source loading (text, PDF, web).
+- `utils/summarizer.py` → Summarization chain using Azure OpenAI (reused from previous tasks).
+- `task_7/AI_Ethics_Report.pdf` → Sample PDF for testing.
+- `task_2/task_2.py` → Summary function reused for output display.
+
+---
+
+## 🧠 Workflow Explanation
+
+### 1️⃣ **Loading Documents**
+The `text_loader()` function now dynamically selects a loader based on the `path_type` argument:
+- `"text"` → Uses `TextLoader` for plain `.txt` files  
+- `"pdf"` → Uses `PyPDFLoader` to extract text from PDF documents  
+- `"web"` → Uses `WebBaseLoader` to scrape and load web page content  
+
+This makes the system flexible enough to handle multiple content formats without manual intervention.
+
+---
+
+### 2️⃣ **Splitting Documents**
+Once loaded, documents are passed to the `text_splitter()` function using `RecursiveCharacterTextSplitter`.  
+This ensures:
+- Uniform chunk sizes (default `chunk_size=150`)  
+- Overlaps of 30 characters to preserve context continuity between chunks.  
+
+---
+
+### 3️⃣ **Creating an In-Memory Vector Store**
+The `in_memory_vector_storage()` function:
+- Converts text chunks into vector embeddings using **AzureOpenAIEmbeddings**.  
+- Stores them in an **InMemoryVectorStore**, enabling semantic retrieval.  
+- Returns a retriever that can efficiently find relevant chunks based on a user query.
+
+---
+

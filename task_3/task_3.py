@@ -1,7 +1,7 @@
 from utils.retriever import text_loader, text_splitter,in_memory_vector_storage
 from task_2.task_2 import summary
 def main():
-    loadedtext=text_loader("task_3/ai_intro.txt")
+    loadedtext=text_loader("task_3/ai_intro.txt","text")
     splittedtext=text_splitter(loadedtext,chunk_size=200,overlap=20)
     vector_storage= in_memory_vector_storage(splittedtext)
     final_document= vector_storage.invoke("AI Milestones")
