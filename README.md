@@ -214,3 +214,76 @@ It uses **LangChain exceptions** for structured error handling and Python’s bu
 | **Configurable Queries** | Supports multiple queries in a single execution cycle. |
 
 ---
+
+# 🧠 Task 6 – Context-Aware Summarization with Conversational Memory  
+
+This task is part of my **LangChain Training Series**, focusing on understanding and implementing **conversational memory** within summarization chains.  
+The objective was to extend the summarizer created in previous tasks by enabling **context retention** using LangChain’s memory components.
+
+---
+
+## 📘 Overview  
+
+In this task, I modified the existing summarization chain to support two types of conversational memory:
+
+1. **ConversationBufferMemory** – retains the last few interactions exactly as they occurred.  
+2. **ConversationSummaryMemory** – maintains a summarized version of prior context to preserve continuity in longer conversations.  
+
+This enhancement enables the summarizer to consider previous user interactions when generating new summaries, creating a more **context-aware** and **stateful** chain.
+
+The task also required comparing how each memory type influences the summarization output and contextual relevance.
+
+---
+
+## 🧩 What I Did  
+
+- Updated the **`summarizer.py`** module to include optional memory support:  
+  - Configurable between `"buffer"`, `"summary"`, or `None`.  
+  - Defaults to stateless mode for compatibility with earlier tasks.  
+  - Integrated **LangChain exceptions** (`OutputParserException`) and file-based logging for debugging.  
+- Created **`task_6.py`**, which:  
+  - Invokes the updated `summarization_chain()` with both memory types.  
+  - Summarizes two related texts:  
+    1. A 100-word text about **Machine Learning (ML)**.  
+    2. A 100-word text about **Deep Learning (DL)**, while considering the previous summary.  
+  - Prints both summaries for comparison.  
+- Designed **dynamic defaults** for all configurable parameters (e.g., temperature, number of lines, memory type).  
+- Logged all activity to a file for traceability and easier debugging.
+
+---
+
+## 💡 What I Understood  
+
+- **ConversationBufferMemory** keeps the most recent exchanges exactly, making it ideal for **short, detailed** dialogues.  
+- **ConversationSummaryMemory** condenses older messages into a **compact summary**, making it more efficient for **longer sessions**.  
+- **Context awareness** allows the summarizer to build upon earlier information, producing more coherent results across related inputs.  
+- The trade-off: buffer memory preserves details but uses more tokens, while summary memory reduces tokens but may lose fine detail.  
+- Integrating memory transforms LangChain chains from **stateless prompt pipelines** into **stateful conversational systems**.  
+- Proper **error handling** and **logging** are essential when experimenting with memory-driven workflows.
+
+---
+
+## ⚙️ Key Features  
+
+| Feature | Description |
+|----------|-------------|
+| **Conversational Memory** | Supports both `ConversationBufferMemory` and `ConversationSummaryMemory`. |
+| **Dynamic Defaults** | Parameters such as memory type, lines, and temperature can be adjusted easily. |
+| **File-Based Logging** | Records all operations and errors for debugging. |
+| **Exception Handling** | Uses LangChain’s `OutputParserException` for structured error capture. |
+| **Backward Compatible** | Works with earlier tasks (1–5) when no memory type is provided. |
+
+---
+
+## 🧪 Results & Analysis  
+
+| Memory Type | Behavior | Observed Outcome |
+|--------------|-----------|------------------|
+| **Buffer** | Keeps last 3 interactions verbatim. | Second summary clearly references and builds on the ML summary. |
+| **Summary** | Condenses prior context before reuse. | Second summary is more general, less detailed, but more efficient. |
+
+**Conclusion:**  
+- *Buffer Memory* is best for short, detail-rich summarization sessions.  
+- *Summary Memory* is better suited for continuous, long-form interactions where token efficiency matters.  
+
+---
