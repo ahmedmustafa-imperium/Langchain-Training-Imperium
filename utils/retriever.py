@@ -15,7 +15,7 @@ def text_loader(path: str, path_type: str = "text"):
     document = loader.load()
     return document
 
-def text_splitter(document: str, chunk_size: int = 200, overlap: int = 20):
+def text_splitter(document: str, chunk_size: int , overlap: int):
     splitted_text= RecursiveCharacterTextSplitter(
         chunk_size=chunk_size,
         chunk_overlap=overlap
