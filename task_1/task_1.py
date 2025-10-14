@@ -23,4 +23,5 @@ def main():
             print(f"{var}: {masked_value}")
 
 if __name__ == "__main__":
+    print("================== RUNNING TASK 1 ==================")
     main()

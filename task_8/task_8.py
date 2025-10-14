@@ -30,4 +30,5 @@ ethical deployment is essential for sustainable technological growth.
 
 
 if __name__ == "__main__":
+    print("================== RUNNING TASK 8 ==================")
     main()

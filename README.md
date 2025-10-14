@@ -412,3 +412,86 @@ This ensures every summary is **structured, predictable, and machine-readable**.
 
 ---
 
+# 🧩 Task 9 – Experimenting with Multi-Query Retrieval  
+
+## 📘 Objective  
+The objective of Task 9 was to explore **multi-query retrieval** techniques using LangChain’s `MultiQueryRetriever`.  
+This experiment extends the standard retriever-based pipeline by generating multiple semantically diverse queries to improve retrieval accuracy and coverage from the same knowledge base.
+
+---
+
+## ⚙️ Implementation Details  
+
+### 🔹 Files Involved  
+- `task_9/task_9.py` → Main driver script for single-query vs. multi-query comparison.  
+- `utils/retriever.py` → Enhanced with a new `multi_query()` function for dynamic multi-query retrieval.  
+- `utils/summarizer.py` → Used to summarize retrieved content through the `summarization_chain()` function from earlier tasks.  
+
+---
+
+## 🧠 Workflow Explanation  
+
+### 1️⃣ **Single-Query Retrieval**  
+The process begins by loading a text file (`ai_intro.txt`) and preparing it for vector storage using:
+- `text_loader()` to load the document.  
+- `text_splitter()` to chunk the text into segments.  
+- `in_memory_vector_storage()` to create an in-memory vector retriever using **Azure OpenAI Embeddings**.  
+
+A single query (e.g., `"AI advancements"`) is used to retrieve relevant chunks, which are then summarized using the summarization chain.
+
+---
+
+### 2️⃣ **Multi-Query Retrieval**  
+Next, the **MultiQueryRetriever** is introduced:
+- Uses the same base retriever and embeddings.  
+- Employs `AzureChatOpenAI` as the LLM to generate **multiple rephrased queries** of the same intent.  
+- Each generated query retrieves potentially different relevant text segments, improving diversity and recall.  
+
+These retrieved chunks are merged and summarized collectively, producing a more comprehensive summary.
+
+---
+
+### 3️⃣ **Query Generation & Comparison**  
+For a fair comparison:
+- The **single-query retriever** retrieves text for `"AI advancements"` directly.  
+- The **multi-query retriever** automatically expands that query into multiple paraphrased forms (e.g., “recent AI developments,” “AI progress milestones,” etc.).  
+- Both retrieved sets are summarized using the same `summarization_chain()` for consistency.  
+
+This allows side-by-side observation of how multi-query retrieval improves coverage and depth.
+
+---
+
+## 🧩 What I Did  
+- Integrated `MultiQueryRetriever` from LangChain into the retrieval pipeline.  
+- Implemented a `multi_query()` function in `retriever.py` that:  
+  - Loads and splits text documents.  
+  - Creates an in-memory vector retriever.  
+  - Wraps it with a **multi-query retriever** powered by `AzureChatOpenAI`.  
+- Enhanced `task_9.py` to:  
+  - Compare single-query and multi-query summaries.  
+  - Print generated alternate queries and retrieved chunks for transparency.  
+  - Summarize both retrieval outputs using the existing summarization chain.  
+
+---
+
+## 💡 What I Understood  
+- How **multi-query retrieval** expands a single query into multiple reformulations to capture semantically diverse information.  
+- The role of **LLMs in query expansion**, making retrieval more robust across varied phrasing.  
+- How combining multiple retrievals enhances **recall** while maintaining relevance.  
+- The importance of **consistent summarization** to fairly compare retrieval performance.  
+- How LangChain’s modular retriever design enables rapid experimentation across retrieval strategies.  
+
+---
+
+## ⚙️ Key Features  
+
+| Feature | Description |
+|----------|-------------|
+| **MultiQueryRetriever Integration** | Uses an LLM to generate alternate query phrasings automatically. |
+| **Single vs Multi Query Comparison** | Demonstrates retrieval diversity and summarization improvement. |
+| **Dynamic Chunking and Embedding** | Maintains consistent document preprocessing for fair testing. |
+| **Azure Integration** | Uses Azure OpenAI for both embeddings and LLM-based query generation. |
+| **Detailed Console Output** | Displays generated queries, retrieved chunks, and summaries for analysis. |
+
+---
+

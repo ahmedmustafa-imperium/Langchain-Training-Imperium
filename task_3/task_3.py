@@ -1,7 +1,7 @@
 from utils.retriever import text_loader, text_splitter,in_memory_vector_storage
 from task_2.task_2 import summary
-def main():
-    loadedtext=text_loader("task_3/ai_intro.txt","text")
+def task_3(path:str):
+    loadedtext=text_loader(path,"text")
     splittedtext=text_splitter(loadedtext,chunk_size=200,overlap=20)
     vector_storage= in_memory_vector_storage(splittedtext)
     final_document= vector_storage.invoke("AI Milestones")
@@ -10,4 +10,5 @@ def main():
     summary(final_document)
 
 if __name__=="__main__":
-    main() 
+    print("================== RUNNING TASK 3 ==================")
+    task_3("task_3/ai_intro.txt") 

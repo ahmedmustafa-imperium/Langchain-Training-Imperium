@@ -90,6 +90,7 @@ def execute_agent_tasks(agent, queries: list[str]):
 
 def main():
     # --- Default dynamic configuration ---
+    print("================== RUNNING TASK 5 ==================")
     tools = configure_tools(
         source_path="task_3/ai_intro.txt",
         summary_sentences=3,

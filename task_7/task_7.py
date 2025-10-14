@@ -12,6 +12,7 @@ def main(path:str,path_type: str):
     summary(final_document)
 
 if __name__=="__main__":
+    print("================== RUNNING TASK 7 ==================")
     print("PDF Query\n")
     main("task_7\AI_Ethics_Report.pdf","pdf")
     print("WEB Query\n")

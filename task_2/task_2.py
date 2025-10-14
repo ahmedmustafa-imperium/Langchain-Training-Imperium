@@ -12,6 +12,7 @@ def summary(text: str):
     print("\n\n 1 lines Summary\n",summary_1)
 
 if __name__=="__main__":
+    print("================== RUNNING TASK 2 ==================")
     text = """
 Artificial Intelligence (AI) refers to the simulation of human intelligence in machines that are programmed to think, learn, and make decisions. 
 Over the past few decades, AI has evolved from simple rule-based systems to advanced models capable of perception, reasoning, and language understanding. 

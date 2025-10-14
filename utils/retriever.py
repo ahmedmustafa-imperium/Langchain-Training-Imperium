@@ -2,8 +2,9 @@ from dotenv import load_dotenv
 import os
 from langchain_community.document_loaders import TextLoader, PyPDFLoader, WebBaseLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_openai import AzureOpenAIEmbeddings
+from langchain_openai import AzureOpenAIEmbeddings,AzureChatOpenAI
 from langchain_core.vectorstores import InMemoryVectorStore
+from langchain.retrievers import MultiQueryRetriever
 load_dotenv()
 
 def text_loader(path: str, path_type: str | None = "text"):
@@ -39,3 +40,18 @@ def in_memory_vector_storage(chunks: str):
     )
     vector_store.add_documents(documents=chunks)
     return vector_store.as_retriever()
+
+def multi_query(path:str,path_type:str):
+    loadedtext=text_loader(path,path_type)
+    splittedtext=text_splitter(loadedtext,chunk_size=200,overlap=20)
+    vector_storage= in_memory_vector_storage(splittedtext)
+    llm=AzureChatOpenAI(
+        deployment_name=os.getenv("DEPLOYMENT_NAME"),
+        temperature=0.6
+    )
+    
+    return MultiQueryRetriever.from_llm(
+        retriever=vector_storage,
+        llm=llm,
+        include_original=True
+    )
