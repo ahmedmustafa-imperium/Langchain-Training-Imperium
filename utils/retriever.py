@@ -6,16 +6,17 @@ from langchain_openai import AzureOpenAIEmbeddings
 from langchain_core.vectorstores import InMemoryVectorStore
 load_dotenv()
 
-def text_loader(path: str, path_type: str):
-    if path_type == "text":
-        loader = TextLoader(path, encoding="utf-8")
-    elif path_type == "pdf":
-        loader=PyPDFLoader(path)
-    elif path_type == "web":
-        loader=WebBaseLoader(path)
-    else:
-        raise ValueError(f"Unsupported source_type: {path_type}")
-    
+def text_loader(path: str, path_type: str | None = "text"):
+    if path_type:   
+        if path_type == "text":
+            loader = TextLoader(path, encoding="utf-8")
+        elif path_type == "pdf":
+            loader=PyPDFLoader(path)
+        elif path_type == "web":
+            loader=WebBaseLoader(path)
+        else:
+            raise ValueError(f"Unsupported source_type: {path_type}")
+        
     document = loader.load()
     return document
 

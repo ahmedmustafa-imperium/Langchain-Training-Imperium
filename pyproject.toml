@@ -21,3 +21,16 @@ dev = [
     "flake8>=7.3.0",
     "ipython>=9.6.0",
 ]
+
+[tool.pdm.scripts]
+# Individual tasks
+task1 = "python -m task_1.task_1"
+task2 = "python -m task_2.task_2"
+task3 = "python -m task_3.task_3"
+task4 = "python -m task_4.task_4"
+task5 = "python -m task_5.task_5"
+task6 = "python -m task_6.task_6"
+task7 = "python -m task_7.task_7"
+
+# Master command to run all sequentially
+start = { composite = ["task1", "task2", "task3", "task4", "task5", "task6", "task7"] }

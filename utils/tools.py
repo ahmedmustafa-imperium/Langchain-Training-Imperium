@@ -46,7 +46,7 @@ def retrieval_tool(
 )-> Tool:
     """Wrap Task 3 retriever as a LangChain Tool."""
     text=text_loader(path)
-    text=text_splitter(text)
+    text=text_splitter(text,200,20)
     retriever=in_memory_vector_storage(text)
 
     if description is None:
