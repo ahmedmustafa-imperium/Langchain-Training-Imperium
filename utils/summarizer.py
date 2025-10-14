@@ -6,6 +6,9 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.memory import ConversationBufferMemory, ConversationSummaryMemory
 from langchain_core.exceptions import OutputParserException
+import json
+import logging
+from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 
 # --- Configure file-based logging for debugging ---
 logging.basicConfig(
@@ -113,3 +116,44 @@ def summarization_chain(
         logging.error(f"Unexpected exception in summarization_chain: {e}")
         raise
 
+
+def generate_json_summary(lines: int=3):
+    """
+    Creates and returns the components needed for structured summarization:
+    - summarization chain
+    - structured output parser
+    - format instructions
+    """
+    try:
+        chain = summarization_chain(lines=lines)
+        
+        schemas = [
+            ResponseSchema(
+                name="summary",
+                description=f"Summarzied version of the passage in {lines} sentences."
+            ),
+            ResponseSchema(
+                name="length",
+                description="Character count of the summary text."
+            )
+        ]
+        
+        parser=StructuredOutputParser.from_response_schemas(schemas)
+        format_instructions=parser.get_format_instructions()
+        logging.info("Structured output parser created successfully.")
+        if hasattr(chain, "llm"):
+            llm = chain.llm
+        else:
+        # Fallback: base_chain is a Runnable (PromptTemplate | LLM)
+            llm = AzureChatOpenAI(
+                azure_deployment=os.getenv("DEPLOYMENT_NAME"),
+                temperature=0.6
+            )
+        return llm,parser,format_instructions
+    except OutputParserException as parse_err:
+        logging.error(f"Output parsing setup failed: {parse_err}")
+        raise
+    except Exception as e:
+        logging.error(f"Unexpected error preparing JSON summary chain: {e}")
+        raise  
+      
