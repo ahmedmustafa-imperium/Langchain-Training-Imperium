@@ -1,6 +1,9 @@
 from langchain.agents import Tool
 from utils.summarizer import summarization_chain
 from utils.retriever import text_loader, text_splitter,in_memory_vector_storage
+from datetime import date
+from langchain.tools import Tool
+from langchain_community.tools.ddg_search import DuckDuckGoSearchRun
 
 def text_summarizer_tool(
     name: str = "TextSummarizer",
@@ -74,3 +77,41 @@ def word_count_tool(
         return f"Word count: {count}"
 
     return Tool(name=name, func=_count, description=description)
+
+def create_date_tool(
+    name: str = "CurrentDateTool",
+    description: str | None = None,
+) -> Tool:
+    """
+    Creates a simple tool that returns the current system date in a readable format.
+    """
+    description = description or "Provides the current date in 'Month Day, Year' format."
+
+    def _fetch_date(_: str = "") -> str:
+        today_date = date.today().strftime("%B %d, %Y")
+        return f"The current date is {today_date}."
+
+    return Tool(
+        name=name,
+        func=_fetch_date,
+        description=description
+    )
+
+
+def create_web_search_tool(name: str = "WebSearch", description: str | None = None) -> Tool:
+    """
+    A real web search tool using DuckDuckGoSearchRun from LangChain.
+    """
+    if description is None:
+        description = "Searches the web using DuckDuckGo and returns summarized results."
+
+    search = DuckDuckGoSearchRun()
+
+    def _search(query: str) -> str:
+        try:
+            result = search.run(query)
+            return f"Search Results: {result}"
+        except Exception as e:
+            return f"Search failed: {e}"
+
+    return Tool(name=name, func=_search, description=description)
