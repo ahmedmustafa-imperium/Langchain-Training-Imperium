@@ -335,3 +335,80 @@ The `in_memory_vector_storage()` function:
 
 ---
 
+# 🧩 Task 8 – Structured Summarization with JSON Output  
+
+## 📘 Objective  
+The objective of Task 8 was to enhance the summarization chain by introducing **structured outputs** using LangChain’s `StructuredOutputParser`.  
+Instead of returning plain text, the summarizer now produces **well-formatted JSON responses** that include both the summary and its length, improving readability and enabling easier integration into downstream processes.
+
+---
+
+## ⚙️ Implementation Details  
+
+### 🔹 Files Involved  
+- `utils/summarizer.py` → Enhanced to include a `generate_json_summary()` function for structured JSON output.  
+- `task_8/task_8.py` → Main driver script that invokes the summarizer and displays formatted JSON results.  
+
+---
+
+## 🧠 Workflow Explanation  
+
+### 1️⃣ **Structured Output Parser Setup**  
+The `generate_json_summary()` function defines a **response schema** using LangChain’s `ResponseSchema` objects:
+- `"summary"` → Contains the summarized text.  
+- `"length"` → Represents the length of the summary in characters.  
+
+A `StructuredOutputParser` is built from these schemas, and its format instructions are embedded into the summarization prompt for the model to follow.
+
+---
+
+### 2️⃣ **Summarization Process**  
+The summarization chain from previous tasks (`summarization_chain()`) is reused to generate summaries.  
+The model receives both the summarization instruction and JSON formatting rules, ensuring that the response follows the defined schema accurately.
+
+---
+
+### 3️⃣ **Post-Processing and Validation**  
+After receiving the model’s raw response:
+1. The output is parsed using `parser.parse()`.  
+2. The parsed JSON object is printed in a readable format for verification.  
+
+This ensures every summary is **structured, predictable, and machine-readable**.
+
+---
+
+## 🧩 What I Did  
+- Enhanced `summarizer.py` to include **StructuredOutputParser** with `ResponseSchema`.  
+- Configured dynamic parameters for model temperature, verbosity, and deployment environment variable.  
+- Added **file-based logging** for debugging and transparency.  
+- Implemented **`generate_json_summary()`** to return:
+  - A properly configured LLM instance.  
+  - A structured output parser.  
+  - The formatting instructions required for JSON generation.  
+- Created **`task_8.py`** to:
+  - Provide a 150-word passage about AI applications.  
+  - Request a structured summary in JSON format.  
+  - Parse and display the result.
+
+---
+
+## 💡 What I Understood  
+- How to use **LangChain’s StructuredOutputParser** for structured JSON-based model responses.  
+- The significance of defining **response schemas** for predictable and validated LLM outputs.  
+- How structured responses improve **automation**, **evaluation**, and **integration** of AI-generated content.  
+- How to maintain both **human readability** and **programmatic consistency** in summarization pipelines.  
+
+---
+
+## ⚙️ Key Features  
+
+| Feature | Description |
+|----------|-------------|
+| **Structured Output Parser** | Ensures the model generates valid JSON responses. |
+| **Response Schemas** | Defines consistent fields for output data. |
+| **Dynamic Model Configuration** | Flexible setup for temperature and environment variables. |
+| **File-Based Logging** | Records key operations and parsing activities. |
+| **JSON-Formatted Summaries** | Returns both the summary and its length in structured form. |
+
+---
+
