@@ -495,3 +495,84 @@ This allows side-by-side observation of how multi-query retrieval improves cover
 
 ---
 
+# 🤖 Task 10 – Building a Question-Answering (QA) Chain on Summaries  
+
+## 📘 Objective  
+The goal of Task 10 is to develop a **question-answering (QA) system** capable of responding to user queries based on either:  
+1. The **original document**, or  
+2. Its **summarized version**.  
+
+This allows us to compare how information compression through summarization impacts the **accuracy and depth** of responses.
+
+---
+
+## ⚙️ Implementation Details  
+
+### 🔹 Files Involved  
+- `task_10/task_10.py` → Main script implementing the QA chain and testing it on full text vs. summary.  
+- `utils/summarizer.py` → Reused summarization pipeline for generating a concise version of the document.  
+- `utils/retriever.py` → Used for text loading (`text_loader`).  
+
+---
+
+## 🧠 Workflow Explanation  
+
+### 1️⃣ **Summarization Stage**  
+- The full document (`ai_intro.txt`) from Task 3 is loaded using `text_loader()`.  
+- A summarization chain (`summarization_chain(lines=5)`) is invoked to condense the content into 5 sentences.  
+- The summary is then extracted from the model’s response, handling both LCEL and `LLMChain` formats.  
+
+This summary represents a **compressed version** of the document that still captures key ideas.
+
+---
+
+### 2️⃣ **Question-Answering Chain**  
+A separate QA chain (`qa_chain()`) is built using a `PromptTemplate` and `AzureChatOpenAI` model.  
+It is designed to:
+- Answer questions **only using the provided context** (no external knowledge).  
+- Take in two input variables:  
+  - `{context}` → the document or summary  
+  - `{question}` → the user’s question  
+
+The prompt enforces grounded answers by instructing the AI to rely strictly on the given text.
+
+---
+
+### 3️⃣ **QA Execution**  
+Two QA runs are performed for comparison:  
+1. **Summary-based QA** → The question is answered using the summarized text.  
+2. **Full-document QA** → The same question is answered using the entire document.  
+
+Both outputs are printed for direct analysis.
+
+---
+
+## 💡 What I Did  
+- Built a **modular QA chain** (`qa_chain()`) using LangChain’s LCEL (`prompt | llm`) structure.  
+- Reused the summarization chain to create an efficient knowledge base for Q&A.  
+- Implemented clear handling of model outputs (`AIMessage`, `dict`, or raw text).  
+- Compared the difference between **summary-level Q&A** and **document-level Q&A**.  
+
+---
+
+## 🧩 What I Understood  
+- How to **combine summarization and Q&A** pipelines to enable lightweight question answering.  
+- The impact of summarization on answer precision — summaries improve efficiency but may omit minor details.  
+- The flexibility of LangChain’s **LCEL syntax**, which simplifies prompt-to-model chaining.  
+- How summarization acts as a **knowledge distillation** step in information retrieval workflows.  
+
+---
+
+## ⚙️ Key Features  
+
+| Feature | Description |
+|----------|-------------|
+| **LCEL-based QA Chain** | Combines `PromptTemplate` and `AzureChatOpenAI` for lightweight pipeline execution. |
+| **Dual QA Evaluation** | Compares answers derived from summary vs. full text. |
+| **Dynamic Summarization** | Generates a 5-sentence summary for context-limited Q&A. |
+| **Azure Integration** | Uses Azure OpenAI deployment for both summarization and question answering. |
+| **Context-Constrained Responses** | Ensures answers are strictly grounded in provided text. |
+
+---
+
+
