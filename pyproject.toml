@@ -33,5 +33,7 @@ task6 = "python -m task_6.task_6"
 task7 = "python -m task_7.task_7"
 task8 = "python -m task_8.task_8"
 task9 = "python -m task_9.task_9"
+task10 = "python -m task_10.task_10"
+task11 = "python -m task_11.task_11"
 # Master command to run all sequentially
-start = { composite = ["task1", "task2", "task3", "task4", "task5", "task6", "task7","task8","task9"] }
+start = { composite = ["task1", "task2", "task3", "task4", "task5", "task6", "task7","task8","task9","task10","task11"] }  

@@ -575,4 +575,100 @@ Both outputs are printed for direct analysis.
 
 ---
 
+# 🤖 Task 11 – Integrating External Tools with Agents  
+
+## 📘 Objective  
+The objective of **Task 11** is to extend existing LangChain agents by integrating **custom external tools** beyond core LangChain components.  
+This exercise demonstrates how agents can combine multiple tools—like a **date fetcher**, a **web search engine**, and a **text summarizer**—to reason and act dynamically in response to user instructions.  
+
+---
+
+## ⚙️ Implementation Details  
+
+### 🔹 Files Involved  
+- `task_11/task_11.py` → Main script orchestrating multi-tool agent execution.  
+- `utils/tools.py` → Defines reusable external tools (summarizer, date fetcher, DuckDuckGo web search).  
+- `utils/agents.py` → Contains the `zeroshot_agent()` function for agent construction.  
+- `task_11/ai_text.txt` → 100-word passage used for summarization tests.  
+
+---
+
+## 🧠 Workflow Explanation  
+
+### 1️⃣ Tool Creation  
+Three distinct tools were implemented to expand the agent’s capabilities:
+
+| Tool | Description |
+|------|--------------|
+| **Text Summarizer** | Wraps the summarization chain (from previous tasks) to condense input text into three sentences. |
+| **Date Tool** | Uses Python’s built-in `datetime` module to return today’s date in a readable format. |
+| **Web Search Tool** | Integrates LangChain’s `DuckDuckGoSearchRun` to perform real-time web searches for up-to-date AI trends. |
+
+---
+
+### 2️⃣ Agent Construction  
+Two **Zero-Shot ReAct Agents** were built using the defined tools:
+
+1. **Summarizer + Date Agent** → Combines summarization and date-fetching abilities.  
+2. **Summarizer + Search Agent** → Combines summarization and live web search capabilities.  
+
+Each agent is created using the reusable `zeroshot_agent()` function, which connects the selected tools with an Azure OpenAI-powered reasoning model.
+
+---
+
+### 3️⃣ Agent Execution  
+
+Two different queries were executed to test tool orchestration:
+
+| Test | Prompt | Expected Behavior |
+|------|---------|------------------|
+| **Test 1** | “Summarize this text and tell me what today's date is.” | Agent summarizes the given text and calls the date tool. |
+| **Test 2** | “Summarize AI trends and search for recent updates.” | Agent summarizes and uses the DuckDuckGo search tool to fetch recent AI-related updates. |
+
+The results demonstrate how the agent **decides which tool to call** based on the query’s intent.
+
+---
+
+## 🧩 What I Did  
+- Implemented `create_date_tool()` using Python’s `datetime` module to return current date strings.  
+- Integrated `DuckDuckGoSearchRun` for real search capabilities instead of a mock response.  
+- Developed `text_summarizer_tool()` that uses `summarization_chain()` for concise text generation.  
+- Built and tested two agents (`summarizer_date_agent` and `summarizer_search_agent`).  
+- Executed and displayed results for both test scenarios in `task_11.py`.  
+
+---
+
+## 💡 What I Understood  
+- How to extend LangChain agents with **custom external tools** that connect to real-world functions or APIs.  
+- The concept of **multi-tool orchestration**, where the agent autonomously selects and executes relevant tools.  
+- How agents interpret prompts to decide which tools to activate and in what sequence.  
+- The flexibility of **Zero-Shot ReAct Agents** in handling complex, multi-step reasoning tasks.  
+- How to integrate external APIs (like DuckDuckGo) within a controlled agent workflow.  
+
+---
+
+## ⚙️ Key Features  
+
+| Feature | Description |
+|----------|-------------|
+| **Real-Time Search Integration** | Uses DuckDuckGoSearchRun for live query results. |
+| **Date Fetching Tool** | Retrieves and formats today’s date using Python’s datetime module. |
+| **Summarization Tool** | Leverages Azure OpenAI summarization chain for concise outputs. |
+| **Zero-Shot Agent Architecture** | Enables autonomous reasoning and tool selection. |
+| **Multi-Tool Orchestration** | Agents dynamically combine summarization, search, and date-fetching. |
+
+---
+
+## 🧪 Results & Analysis  
+
+| Test | Tools Used | Observed Outcome |
+|------|-------------|------------------|
+| **1 – Summarization + Date** | Summarizer, Date Tool | Produced a concise summary and appended the current date. |
+| **2 – Summarization + Search** | Summarizer, Web Search Tool | Generated a summary and retrieved live web results about AI trends. |
+
+**✅ Conclusion:**  
+This task successfully demonstrates **agent extensibility** through external tool integration.  
+By combining the summarizer, date, and web search tools, the agent can now **reason across multiple domains**, fetch **real-time data**, and **deliver contextual, up-to-date answers**.
+
+---
 
